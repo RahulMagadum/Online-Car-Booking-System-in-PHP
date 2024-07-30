@@ -1,16 +1,11 @@
-<!--Server Side Scripting Language to inject login code-->
-<!-- Author By: MH RONY
-Author Website: https://developerrony.com
-Github Link: https://github.com/dev-mhrony
-Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
---><?php
+<?php
     session_start();
     include('vendor/inc/config.php');//get configuration file
     if(isset($_POST['admin_login']))
     {
       $a_email=$_POST['a_email'];
       $a_pwd=($_POST['a_pwd']);//
-      $a_pwd= md5($a_pwd);//
+    //   $a_pwd= md5($a_pwd);//
       $stmt=$mysqli->prepare("SELECT a_email, a_pwd, a_id FROM tms_admin WHERE a_email=? and a_pwd=? ");//sql to log in user
       $stmt->bind_param('ss',$a_email,$a_pwd);//bind fetched parameters
       $stmt->execute();//execute bind
@@ -31,11 +26,7 @@ Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
       }
   }
 ?>
-<!-- Author By: MH RONY
-Author Website: https://developerrony.com
-Github Link: https://github.com/dev-mhrony
-Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
--->
+
 <!--End Server side-->
 <!DOCTYPE html>
 <html lang="en">
@@ -54,11 +45,7 @@ Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles for this template-->
     <link href="vendor/css/sb-admin.css" rel="stylesheet">
-    <!-- Author By: MH RONY
-Author Website: https://developerrony.com
-Github Link: https://github.com/dev-mhrony
-Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
--->
+
 </head>
 
 <body class="bg-dark">
@@ -73,11 +60,7 @@ Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
     </script>
 
     <?php } ?>
-    <!-- Author By: MH RONY
-Author Website: https://developerrony.com
-Github Link: https://github.com/dev-mhrony
-Youtube Link: https://www.youtube.com/channel/UChYhUxkwDNialcxj-OFRcDw
--->
+
     <div class="container">
         <div class="card card-login mx-auto mt-5">
             <div class="card-header">Login</div>

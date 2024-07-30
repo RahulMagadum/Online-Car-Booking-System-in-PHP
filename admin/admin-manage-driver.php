@@ -1,49 +1,49 @@
 <?php
-  session_start();
-  include('vendor/inc/config.php');
-  include('vendor/inc/checklogin.php');
-  check_login();
-  $aid=$_SESSION['a_id'];
+session_start();
+include ('vendor/inc/config.php');
+include ('vendor/inc/checklogin.php');
+check_login();
+$aid = $_SESSION['a_id'];
 
-  if(isset($_GET['del']))
-{
-      $id=intval($_GET['del']);
-      $adn="delete from tms_user where u_id=?";
-      $stmt= $mysqli->prepare($adn);
-      $stmt->bind_param('i',$id);
-      $stmt->execute();
-      $stmt->close();	 
+if (isset($_GET['del'])) {
+    $id = intval($_GET['del']);
+    $adn = "delete from tms_user where u_id=?";
+    $stmt = $mysqli->prepare($adn);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $stmt->close();
 
-        if($stmt)
-        {
-          $succ = "Driver Fired";
-        }
-          else
-          {
-            $err = "Try Again Later";
-          }
-  }
+    if ($stmt) {
+        $succ = "Driver Fired";
+    } else {
+        $err = "Try Again Later";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include('vendor/inc/head.php');?>
+<?php include ('vendor/inc/head.php'); ?>
 
 <body id="page-top">
 
-    <?php include("vendor/inc/nav.php");?>
+    <?php include ("vendor/inc/nav.php"); ?>
 
 
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <?php include('vendor/inc/sidebar.php');?>
+        <?php include ('vendor/inc/sidebar.php'); ?>
 
         <div id="content-wrapper">
 
             <div class="container-fluid">
                 <p>
-                    <marquee onMouseOver="this.stop()" onMouseOut="this.start()">This code is not for sale. Its sole owner is Code Camp BD For any need you can message me <a href="https://www.facebook.com/dev.mhrony">MH RONY</a> and don't forget to <a href="https://www.youtube.com/@codecampbdofficial">subscribe</a> the youtube channel.</marquee>
+                    <marquee onMouseOver="this.stop()" onMouseOut="this.start()">This code is not for sale. Its sole
+                        owner is Code Camp BD For any need you can message me <a
+                            href="https://www.facebook.com/dev.mhrony">MH RONY</a> and don't forget to <a
+                            href="https://www.youtube.com/@codecampbdofficial">subscribe</a> the youtube channel.
+                    </marquee>
                 </p>
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
@@ -52,24 +52,24 @@
                     </li>
                     <li class="breadcrumb-item active">Manage Drivers</li>
                 </ol>
-                <?php if(isset($succ)) {?>
-                <!--This code for injecting an alert-->
-                <script>
-                setTimeout(function() {
-                        swal("Success!", "<?php echo $succ;?>!", "success");
-                    },
-                    100);
-                </script>
+                <?php if (isset($succ)) { ?>
+                    <!--This code for injecting an alert-->
+                    <script>
+                        setTimeout(function () {
+                            swal("Success!", "<?php echo $succ; ?>!", "success");
+                        },
+                            100);
+                    </script>
 
                 <?php } ?>
-                <?php if(isset($err)) {?>
-                <!--This code for injecting an alert-->
-                <script>
-                setTimeout(function() {
-                        swal("Failed!", "<?php echo $err;?>!", "Failed");
-                    },
-                    100);
-                </script>
+                <?php if (isset($err)) { ?>
+                    <!--This code for injecting an alert-->
+                    <script>
+                        setTimeout(function () {
+                            swal("Failed!", "<?php echo $err; ?>!", "Failed");
+                        },
+                            100);
+                    </script>
 
                 <?php } ?>
 
@@ -95,28 +95,30 @@
                                 </thead>
                                 <?php
 
-                    $ret="SELECT * FROM tms_user where u_category = 'Driver' "; 
-                    $stmt= $mysqli->prepare($ret) ;
-                    $stmt->execute() ;//ok
-                    $res=$stmt->get_result();
-                    $cnt=1;
-                    while($row=$res->fetch_object())
-                {
-                ?>
-                                <tbody>
-                                    <tr>
-                                        <td><?php echo $cnt;?></td>
-                                        <td><?php echo $row->u_fname;?> <?php echo $row->u_lname;?></td>
-                                        <td><?php echo $row->u_phone;?></td>
-                                        <td><?php echo $row->u_addr;?></td>
-                                        <td><?php echo $row->u_email;?></td>
-                                        <td>
-                                            <a href="admin-manage-single-driver.php?u_id=<?php echo $row->u_id;?>" class="badge badge-success">Update</a>
-                                            <a href="admin-manage-driver.php?del=<?php echo $row->u_id;?>" class="badge badge-danger">Fire</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <?php $cnt = $cnt+1; }?>
+                                $ret = "SELECT * FROM tms_user where u_category = 'Driver' ";
+                                $stmt = $mysqli->prepare($ret);
+                                $stmt->execute();//ok
+                                $res = $stmt->get_result();
+                                $cnt = 1;
+                                while ($row = $res->fetch_object()) {
+                                    ?>
+                                    <tbody>
+                                        <tr>
+                                            <td><?php echo $cnt; ?></td>
+                                            <td><?php echo $row->u_fname; ?>     <?php echo $row->u_lname; ?></td>
+                                            <td><?php echo $row->u_phone; ?></td>
+                                            <td><?php echo $row->u_addr; ?></td>
+                                            <td><?php echo $row->u_email; ?></td>
+                                            <td>
+                                                <a href="admin-manage-single-driver.php?u_id=<?php echo $row->u_id; ?>"
+                                                    class="badge badge-success">Update</a>
+                                                <a href="admin-manage-driver.php?del=<?php echo $row->u_id; ?>"
+                                                    class="badge badge-danger">Fire</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <?php $cnt = $cnt + 1;
+                                } ?>
 
                             </table>
                         </div>
@@ -127,7 +129,7 @@
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
-            <?php include("vendor/inc/footer.php");?>
+            <?php include ("vendor/inc/footer.php"); ?>
         </div>
         <!-- /.content-wrapper -->
 
@@ -140,7 +142,8 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
